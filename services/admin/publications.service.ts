@@ -10,12 +10,13 @@ export const publicationsService = {
    * Liste paginée des publications
    * GET /admin/posts?page=1&per_page=10
    */
-  async list(page = 1, perPage = 10, status?: "draft" | "published" | "archived", search?: string) {
+  async list(page = 1, perPage = 10, status?: "draft" | "published" | "archived", search?: string, authorId?: number) {
     const params = new URLSearchParams();
     params.set("page", String(page));
     params.set("per_page", String(perPage));
     if (status) params.set("status", status);
     if (search) params.set("search", search);
+    if (authorId) params.set("author_id", String(authorId));
 
     return get<PaginatedResponse<Publication>>(`/admin/posts?${params.toString()}`);
   },
@@ -66,5 +67,13 @@ export const publicationsService = {
    */
   async archive(id: number) {
     return post<ApiResponse<Publication>>(`/admin/posts/${id}/archive`, {});
+  },
+
+  async getBySlug(slug: string) {
+    return get<ApiResponse<Publication>>(`/admin/posts/slug/${slug}`);
+  },
+
+  async getPublished(page = 1, perPage = 10) {
+    return this.list(page, perPage, "published");
   },
 };

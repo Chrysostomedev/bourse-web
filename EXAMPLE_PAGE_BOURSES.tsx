@@ -129,14 +129,15 @@ export default function BoursesPage() {
   // Effet pour remplir le formulaire quand une bourse est sélectionnée
   useEffect(() => {
     if (selectedBourse && isFormOpen && formMode === "edit") {
+      const sb = selectedBourse as any;
       setFormData({
-        title: selectedBourse.title,
-        description: selectedBourse.description,
-        country_id: selectedBourse.country_id,
-        amount: selectedBourse.amount || 0,
-        currency: selectedBourse.currency || "USD",
-        level: selectedBourse.level || "master",
-        status: selectedBourse.status || "active",
+        title: sb.title,
+        description: sb.description,
+        country_id: sb.country_id,
+        amount: sb.amount || 0,
+        currency: sb.currency || "USD",
+        level: sb.level || "master",
+        status: sb.status || "active",
       });
     }
   }, [selectedBourse, isFormOpen, formMode]);
@@ -204,7 +205,7 @@ export default function BoursesPage() {
                 </tr>
               </thead>
               <tbody className="divide-y">
-                {bourses.map((bourse) => (
+                {bourses.map((bourse: any) => (
                   <tr key={bourse.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-sm">{bourse.title}</td>
                     <td className="px-6 py-4 text-sm">{bourse.country?.name || "-"}</td>

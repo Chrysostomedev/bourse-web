@@ -58,4 +58,16 @@ export const usersService = {
   async updateRole(id: number, role: string) {
     return put<ApiResponse<User>>(`/admin/users/${id}/role`, { role });
   },
+
+  async updateStatus(id: number, status: "active" | "inactive" | "banned") {
+    return put<ApiResponse<User>>(`/admin/users/${id}/status`, { status });
+  },
+
+  async getActive(page = 1, perPage = 10) {
+    return this.list(page, perPage, { status: "active" });
+  },
+
+  async export(format: "csv" | "json" = "csv") {
+    return get<any>(`/admin/users/export?format=${format}`);
+  },
 };

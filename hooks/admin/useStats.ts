@@ -2,7 +2,8 @@
 
 import { useCallback, useState } from "react";
 import { statsService } from "@/services/admin/stats.service";
-import type { StatsOverview, ApiError } from "@/core/error";
+import type { StatsOverview } from "@/types";
+import type { ApiError } from "@/core/error";
 
 export type StatsMonthly = {
   new_users: number;

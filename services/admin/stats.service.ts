@@ -33,4 +33,16 @@ async getOverview() {
       data: Array<{ field: string; count: number }>;
     }>("/stats/by-field");
   },
+
+  async getMonthly() {
+    return get<{ data: any }>("/stats/monthly");
+  },
+
+  async getTopBourses(limit = 10) {
+    return get<{ data: any }>(`/stats/top-bourses?limit=${limit}`);
+  },
+
+  async getActivity(days = 30) {
+    return get<{ data: any }>(`/stats/activity?days=${days}`);
+  },
 };
