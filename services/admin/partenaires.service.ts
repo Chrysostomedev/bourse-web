@@ -51,4 +51,8 @@ export const partenairesService = {
   async delete(id: number) {
     return del<ApiResponse<{ message: string }>>(`/admin/partners/${id}`);
   },
+
+  async getActive() {
+    return get<PaginatedResponse<Partenaire>>("/admin/partners?status=active");
+  },
 };

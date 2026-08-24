@@ -3,7 +3,7 @@
 import { useCallback, useState } from "react";
 import { productsService } from "@/services/admin/products.service";
 import { normalizeList, normalizeItem } from "@/core/normalize";
-import type { Product, CreateProductDTO, UpdateProductDTO, PaginatedResponse } from "@/types";
+import type { PaginatedResponse } from "@/types";
 import type { ApiError } from "@/core/error";
 
 export interface Product {

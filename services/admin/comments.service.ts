@@ -1,4 +1,4 @@
-import { apiClient } from "@/core/api-client";
+import { get, post, del } from "@/core/axios";
 
 export type Comment = {
   id: number;
@@ -31,8 +31,7 @@ export const commentsAdminService = {
       last_page: number;
     };
   }> {
-    const res = await apiClient.get(`/admin/comments?page=${page}&limit=${limit}`);
-    return res.data ?? res;
+    return get(`/admin/comments?page=${page}&limit=${limit}`);
   },
 
   /**
@@ -42,22 +41,21 @@ export const commentsAdminService = {
     data: Comment[];
     post_title: string;
   }> {
-    const res = await apiClient.get(`/admin/posts/${postId}/comments?page=${page}`);
-    return res.data ?? res;
+    return get(`/admin/posts/${postId}/comments?page=${page}`);
   },
 
   /**
    * Récupère les statistiques des commentaires
    */
   async getStats(): Promise<CommentStats> {
-    return apiClient.get(`/admin/comments/stats`);
+    return get(`/admin/comments/stats`);
   },
 
   /**
    * Supprime un commentaire
    */
   async delete(commentId: number): Promise<{ message: string }> {
-    return apiClient.delete(`/admin/comments/${commentId}`);
+    return del(`/admin/comments/${commentId}`);
   },
 
   /**
@@ -67,23 +65,20 @@ export const commentsAdminService = {
     status: "pending" | "approved" | "rejected",
     page = 1
   ): Promise<{ data: Comment[] }> {
-    const res = await apiClient.get(
-      `/admin/comments?status=${status}&page=${page}`
-    );
-    return res.data ?? res;
+    return get(`/admin/comments?status=${status}&page=${page}`);
   },
 
   /**
    * Approuve un commentaire
    */
   async approve(commentId: number): Promise<{ message: string }> {
-    return apiClient.post(`/admin/comments/${commentId}/approve`, {});
+    return post(`/admin/comments/${commentId}/approve`, {});
   },
 
   /**
    * Rejette un commentaire
    */
   async reject(commentId: number): Promise<{ message: string }> {
-    return apiClient.post(`/admin/comments/${commentId}/reject`, {});
+    return post(`/admin/comments/${commentId}/reject`, {});
   },
 };

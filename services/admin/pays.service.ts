@@ -58,4 +58,8 @@ export const paysService = {
   async delete(id: number) {
     return del<ApiResponse<{ message: string }>>(`/admin/countries/${id}`);
   },
+
+  async getActive() {
+    return get<any>("/admin/countries?status=active");
+  },
 };
