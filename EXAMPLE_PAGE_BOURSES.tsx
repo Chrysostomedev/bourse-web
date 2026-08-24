@@ -38,7 +38,7 @@ export default function BoursesPage() {
   const [status, setStatus] = useState<string>("");
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formMode, setFormMode] = useState<"create" | "edit">("create");
-  const [formData, setFormData] = useState<CreateBourseDTO>({
+  const [formData, setFormData] = useState<any>({
     title: "",
     country_id: 0,
     amount: 0,
