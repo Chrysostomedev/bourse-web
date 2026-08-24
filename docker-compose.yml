@@ -13,8 +13,8 @@ services:
     environment:
       - NODE_ENV=production
     networks:
-      - capec_network
+      - bourse_network
 
 networks:
   bourse_network:
-    driver: bridge
+    external: true
